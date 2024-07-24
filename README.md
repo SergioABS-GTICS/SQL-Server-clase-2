@@ -33,3 +33,5 @@
     GO
     SET SHOWPLAN_ALL OFF
     GO
+
+![image](https://github.com/user-attachments/assets/33579a7c-cda5-43c0-8ab4-2735ff105d52)
