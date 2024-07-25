@@ -49,3 +49,8 @@ CONSECUENCIAS DEL TABLE SCAN:
 **CONSULTAS SENCILLAS: Suele ser eficiente para consultas sencillas que necesitan procesar la mayoría de filas de la tabla, como consultas SELECT sin WHERE**
 
 **ÍNDICES: Se recomienda crear índices en las columnas que se utilizan con mayor frecuencia en clausulas WHERE, ORDER BY y JOIN. Esto permite que el motor de consultas utilice índices en lugar de "Table Scan"**
+
+
+
+
+
