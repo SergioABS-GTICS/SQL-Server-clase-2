@@ -41,3 +41,11 @@
 El TABLE SCAN se refiere a la forma a la que el motor de base de datos procesa una consulta SELECT. **Esto ocurre cuando no hay índices disponibles o cuando el motor de consultas determina escaneo que el escaneo completo de la tabla es la mejor estrategia de ejecución**.
 
 Cuando se realiza "Table Scan", el motor de SQL Server lee todas las filas de la tabla, una por una. **Esta operación puede ser costosa, cuando se trata de tablas grandes**
+
+CONSECUENCIAS DEL TABLE SCAN:
+
+**RENDIMIENTO: Los table Scan suelen ser lentos para tablas grandes**
+
+**CONSULTAS SENCILLAS: Suele ser eficiente para consultas sencillas que necesitan procesar la mayoría de filas de la tabla, como consultas SELECT sin WHERE**
+
+**ÍNDICES: Se recomienda crear índices en las columnas que se utilizan con mayor frecuencia en clausulas WHERE, ORDER BY y JOIN. Esto permite que el motor de consultas utilice índices en lugar de "Table Scan"**
