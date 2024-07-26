@@ -188,10 +188,10 @@ Ejemplo 2: si se escribe IDENTITY(200,4): El valor inicial es 200 y el increment
     GO
     CREATE TABLE Personal.rol
     (
-        cod_rol_in    INT IDENTITY(1,1)
-        CONSTRAINT pk_personal_rol_cod_rol_in   
-        PRIMARY KEY NOT NULL,
+        cod_rol_in    INT IDENTITY(1,1) NOT NULL,
         nom_rol_vc VARCHAR(20)
+    	CONSTRAINT pk_personal_rol_cod_rol_in   
+        PRIMARY KEY (cod_rol_in),
     )
     GO
     INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Ventas');
