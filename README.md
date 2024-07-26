@@ -264,12 +264,12 @@ ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
     CREATE TABLE Personal.rol
     (
         cod_rol_in    INT IDENTITY(1,1)
-    CONSTRAINT pk_personal_rol_cod_rol_in
-    PRIMARY KEY NOT NULL,
-    --ALTER KEY
-    cod_rol_ch    CHAR(4)
-    CONSTRAINT ak_personal_rol_cod_rol_in UNIQUE NOT NULL,
-    --
+        CONSTRAINT pk_personal_rol_cod_rol_in
+        PRIMARY KEY NOT NULL,
+        --ALTER KEY
+        cod_rol_ch    CHAR(4)
+        CONSTRAINT ak_personal_rol_cod_rol_in UNIQUE NOT NULL,
+        --
         nom_rol_vc VARCHAR(20),
     )
     GO
