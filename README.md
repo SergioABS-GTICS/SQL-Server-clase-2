@@ -340,3 +340,8 @@ RIGHT: Comienza desde el caracter pegado a la derecha y cuenta la cantidad de ca
     UNIQUE (cod_rol_ch)
     
     SELECT * FROM Personal.rol
+
+## ÍNDICES
+
+Son estructuras de datos que mejoran el rendimiento de las consultas, para que el motor de SQL no busque info en toda la tabla.
+
