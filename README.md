@@ -189,14 +189,52 @@ Ejemplo 2: si se escribe IDENTITY(200,4): El valor inicial es 200 y el increment
     CREATE TABLE Personal.rol
     (
         cod_rol_in    INT IDENTITY(1,1) NOT NULL,
-        nom_rol_vc VARCHAR(20)
+        nom_rol_vc VARCHAR(20),
         CONSTRAINT pk_personal_rol_cod_rol_in   
-        PRIMARY KEY (cod_rol_in),
+        PRIMARY KEY (cod_rol_in)
     )
     GO
     INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Ventas');
     INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Almacén');
     INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Facturación');
+    GO
+    SELECT * FROM Personal.rol
+    GO
+
+**CREACIÓN DE TABLA CON PK USANDO ALTER**
+
+ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
+
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Rol'
+    )
+    DROP TABLE Personal.rol
+    GO
+    CREATE TABLE Personal.rol
+    (
+        cod_rol_in    INT IDENTITY(1,1) NOT NULL,
+        nom_rol_vc VARCHAR(20),
+    )
+    GO
+    INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Ventas');
+    INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Almacén');
+    INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Facturación');
+    
+    --Modificamos la TABLA con Alter
+    ALTER TABLE Personal.rol
+    ADD CONSTRAINT pk_personal_rol_cod_rol_in   
+    PRIMARY KEY (cod_rol_in)
+    
     GO
     SELECT * FROM Personal.rol
     GO
