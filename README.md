@@ -36,7 +36,9 @@
 
 ![image](https://github.com/user-attachments/assets/33579a7c-cda5-43c0-8ab4-2735ff105d52)
 
-**TABLE SCAN**
+## Estrategias de Consulta empleado por SQL Server
+
+**1) TABLE SCAN**
 
 El TABLE SCAN se refiere a la forma a la que el motor de base de datos procesa una consulta SELECT. **Esto ocurre cuando no hay índices disponibles o cuando el motor de consultas determina escaneo que el escaneo completo de la tabla es la mejor estrategia de ejecución**.
 
@@ -50,7 +52,21 @@ Cuando se realiza "Table Scan", el motor de SQL Server lee todas las filas de la
 
 **ÍNDICES: Se recomienda crear índices en las columnas que se utilizan con mayor frecuencia en clausulas WHERE, ORDER BY y JOIN. Esto permite que el motor de consultas utilice índices en lugar de "Table Scan"**
 
+**2) CLUSTERED INDEX SCAN**
 
+Estrategia de ejecución de consultas donde el motor de consultas realiza un escaneo completo de un índice clúster, en vez de buscar datos específicos en la tabla.
+
+El índice clúster es un tipo especial de índice en el que los datos de la tabla se ordenan físicamente en el mismo orden que el índice. Esto significa que los datos de la tabla se almacenan en páginas de datos ordenadas según la clave del índice clúster.
+
+**CARACTERÍSTICAS DEL CLUSTERED INDEX SCAN:**
+
+**RENDIMIENTO: Suele ser más eficiente que un "Table Scan" cuando se necesita procesar la mayor parte de datos de una tabla. Esto porque el motor lee los datos en base al orden del índice clúster. Reduce la cantidad de accesos aleatorios al disco**
+
+**ÍNDICE ORDENADO: El motor de búsqueda recorre los datos de manera secuencial, por lo que hay mayor eficiencia (menor tiempo de procesamiento)**
+
+**CONSULTA DE RANGO: Eficiente para consultas que buscan un rango de valores, como WHERE, FECHA BETWEEN. El motor de base de datos puede recorrer los datos ordenados de manera eficiente**
+
+**COLUMNAS INCLUIDAS: Se pueden incluir otras columnas de la tabla en el índice. Esto mejora el rendimiento ya que no necesariamente se acceden a todas las columnas de la tabla en sí. Por ejemplo "SELECT id, nombre". Es decir hay rendimiento tanto para no recorrer todas las columnas ni todas las filas necesariamente**
 
 
 
