@@ -238,3 +238,7 @@ ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
     GO
     SELECT * FROM Personal.rol
     GO
+
+**USO DEL ORDER BY [Numero de columna] ASC O DESC**
+
+![image](https://github.com/user-attachments/assets/9a69bd1f-ec20-4635-a29c-960b56ef9122)
