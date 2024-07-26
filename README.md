@@ -469,3 +469,7 @@ Para extraer datos de otra db y setearlas a otra, simplemente se usa INSERT a la
     SET cod_emp_ch = 'E' +  RIGHT('000' + LTRIM(cod_emp_in),3)
     
     SELECT * FROM Personal.Empleado
+
+**HACIENDO UPDATE**
+
+![image](https://github.com/user-attachments/assets/6370e2e1-cb81-4519-a08c-939260d314a6)
