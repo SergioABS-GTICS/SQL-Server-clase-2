@@ -294,7 +294,7 @@ ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
 
 **UPDATE con función LTRIM y RIGHT**
 
-LTRIM: elimina los espacios en blanco de la izquierda en una cadena de caracteres.
+LTRIM: Convierte un entero a Character y elimina los espacios en blanco que existen en la izquierda.
 
 RIGHT: Comienza desde el caracter pegado a la derecha y cuenta la cantidad de caracteres que se solicita. Ejemplo: Right("Sergio",5) = "ergio"
 
