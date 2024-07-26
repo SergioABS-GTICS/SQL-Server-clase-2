@@ -242,3 +242,40 @@ ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
 **USO DEL ORDER BY [Numero de columna] ASC O DESC**
 
 ![image](https://github.com/user-attachments/assets/9a69bd1f-ec20-4635-a29c-960b56ef9122)
+
+
+## ALTERNATE KEY (CLAVE ALTERNATIVA)
+
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Rol'
+    )
+    DROP TABLE Personal.rol
+    GO
+    CREATE TABLE Personal.rol
+    (
+        cod_rol_in    INT IDENTITY(1,1)
+    	CONSTRAINT pk_personal_rol_cod_rol_in
+    	PRIMARY KEY NOT NULL,
+        --ALTER KEY
+    	cod_rol_ch    CHAR(4)
+    	CONSTRAINT ak_personal_rol_cod_rol_in UNIQUE NOT NULL,
+        --
+        nom_rol_vc VARCHAR(20),
+    )
+    GO
+    INSERT INTO Personal.rol(cod_rol_ch,nom_rol_vc) VALUES ('R001','Ventas');
+    INSERT INTO Personal.rol(cod_rol_ch,nom_rol_vc) VALUES ('R002','Almacén');
+    INSERT INTO Personal.rol(cod_rol_ch,nom_rol_vc) VALUES ('R003','Facturación');
+    GO
+    SELECT * FROM Personal.rol
+    GO
