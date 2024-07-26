@@ -126,3 +126,6 @@ Debido a que la información debe ser única, entonces cada fila de información
     GO
     --SET SHOWPLAN_ALL OFF
     GO
+## IDENTITY (valor_inicial, incremento)
+
+El atributo IDENTITY 
