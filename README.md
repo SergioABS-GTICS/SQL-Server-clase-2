@@ -126,7 +126,9 @@ Debido a que la información debe ser única, entonces cada fila de información
     GO
     --SET SHOWPLAN_ALL OFF
     GO
-**Otra forma de crear una tabla con PK (más empleada: Se definen todas las columnas y el tipo de dato y al final se coloca cuál será la PK mediante un CONSTRAINT)**
+**Otra forma de crear una tabla con PK**
+
+(**Más empleada**: Se definen todas las columnas y el tipo de dato y al final se coloca cuál será la PK mediante un CONSTRAINT)
 
     USE Empresa
     GO
