@@ -169,4 +169,34 @@ Ejemplo: si se escribe IDENTITY(100,1): Empieza en 100 y el incremento es de 1
 
 Ejemplo 2: si se escribe IDENTITY(200,4): El valor inicial es 200 y el incremento es 4
 
+**USO DEL IDENTITY EN EL CREADO DE UNA TABLA CON PK**
 
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Rol'
+    )
+    DROP TABLE Personal.rol
+    GO
+    CREATE TABLE Personal.rol
+    (
+        cod_rol_in    INT IDENTITY(1,1)
+        CONSTRAINT pk_personal_rol_cod_rol_in   
+        PRIMARY KEY NOT NULL,
+        nom_rol_vc VARCHAR(20)
+    )
+    GO
+    INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Ventas');
+    INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Almacén');
+    INSERT INTO Personal.rol(nom_rol_vc) VALUES ('Facturación');
+    GO
+    SELECT * FROM Personal.rol
+    GO
