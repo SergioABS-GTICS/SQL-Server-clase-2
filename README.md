@@ -68,5 +68,27 @@ El índice clúster es un tipo especial de índice en el que los datos de la tab
 
 **COLUMNAS INCLUIDAS: Se pueden incluir otras columnas de la tabla en el índice. Esto mejora el rendimiento ya que no necesariamente se acceden a todas las columnas de la tabla en sí. Por ejemplo "SELECT id, nombre". Es decir hay rendimiento tanto para no recorrer todas las columnas ni todas las filas necesariamente**
 
+## PRIMARY KEY - PK
 
+Debido a que la información debe ser única, entonces cada fila de información debe tener un identificador único.
+
+**CARACTERÍSTICAS DE LA PK**
+
+**IDENTIFICADOR ÚNICO: Tiene un valor único**
+
+**NO NULABILIDAD: Por defecto no deben ser nulos**
+
+**INDEXACIÓN AUTOMÁTICA: Cuando se define la PK en una tabla, el motor de base de datos crea automáticamente un índice clúster en esa clave. Esto optimiza las operaciones de CRUD**
+
+**INTEGRIDAD REFERENCIAL: La PK es clave para la integridad de tablas. Cuando se establece una relación entre tablas la PK se utiliza como clave foránea (FK) en otra tabla**
+
+**RENDIMIENTO: Muy buen rendimiento**
+
+**SELECCIÓN DE LA CLAVE PRIMARIA: Se deben emplear con las siguientes características:**
+
+    **ÚNICA: Los valores son únicos para cada fila**
+
+    **ESTABLE: Los valores deben ser estables y no cambiar a largo plazo**
+
+    **MÍNIMA: La PK debe contener la mínima cantidad de columnas necesarias para poder identificar las filas de la tabla. Puede ser de 2 o más pero su busca la de menor cantidad**
 
