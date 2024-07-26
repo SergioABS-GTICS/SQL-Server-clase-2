@@ -406,3 +406,9 @@ Son estructuras de datos que mejoran el rendimiento de las consultas, para que e
     GO
     SELECT * FROM Personal.rol
     GO
+
+**PARA HACER CONSULTAS A UNA DB CON EL MOUSE**
+
+![image](https://github.com/user-attachments/assets/c99e6f52-443d-4e0f-9716-dffbfe6be13c)
+
+
