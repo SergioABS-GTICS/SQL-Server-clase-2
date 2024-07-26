@@ -345,3 +345,64 @@ RIGHT: Comienza desde el caracter pegado a la derecha y cuenta la cantidad de ca
 
 Son estructuras de datos que mejoran el rendimiento de las consultas, para que el motor de SQL no busque info en toda la tabla.
 
+**TIPOS DE ÍNDICES**
+
+**ÍNDICE CLÚSTER (PK): Ordena los datos de la tablaen el orden definido por las columnas del índice. Solo se puede tener 1 índice clúster. La PK es definida como índice clúster**
+
+**ÍNDICES NO CLÚSTER: Apunta a los datos de la tabla, pero no los organiza físicamente. Una tabla puede tener varios índices no clúster. Son eficientes para consultas que emplean columnas indexadas**
+
+**ÍNDICES ÚNICOS: Garantizan que los valores en una columna sean únicos. Pueden ser clúster o no clúster**
+
+**ÍNDICES ESPACIALES: Optimizan las consultas con datos geográficos y geométricos. Permiten estas búsquedas basadas en proximidad espacial**
+
+**ÍNDICES FILTRADOS: Indexan un subcojunto de filas de una tabla, basado en condición específica. Pueden mejorar el rendimiento cuando las consultas son para subconjuntos de datos de una tabla**
+
+**CREACIÓN DE ÍNDICE ASIGNADO A UN CAMPO DE UNA TABLA**
+
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Rol'
+    )
+    DROP TABLE Personal.rol
+    GO
+    CREATE TABLE Personal.rol
+    (
+        cod_rol_in        INT IDENTITY(1, 1) NOT NULL,
+        cod_rol_ch        CHAR(4) NULL,
+        nom_rol_vc        VARCHAR(20) NOT NULL,
+    
+        CONSTRAINT pk_personal_rol_cod_rol_in
+        PRIMARY KEY(cod_rol_in),
+    )
+    GO
+    INSERT INTO Personal.rol(nom_rol_vc)
+    SELECT name
+    FROM sys.schemas
+    WHERE principal_id != schema_id
+    ORDER BY name
+    GO
+    SELECT * FROM Personal.rol
+    GO
+    UPDATE Personal.rol
+    SET cod_rol_ch = 'R'+RIGHT('000'+LTRIM(cod_rol_in),3) FROM Personal.rol
+    GO
+    
+    ALTER TABLE Personal.rol
+    ADD CONSTRAINT ak_personal_cod_rol_ch
+    UNIQUE (cod_rol_ch)
+    GO
+    --Crear índice a un campo
+    CREATE INDEX ix_personal_rol_nom_rol_vc
+    ON Personal.rol(nom_rol_vc)
+    GO
+    SELECT * FROM Personal.rol
+    GO
