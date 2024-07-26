@@ -190,7 +190,7 @@ Ejemplo 2: si se escribe IDENTITY(200,4): El valor inicial es 200 y el increment
     (
         cod_rol_in    INT IDENTITY(1,1) NOT NULL,
         nom_rol_vc VARCHAR(20)
-    	CONSTRAINT pk_personal_rol_cod_rol_in   
+    CONSTRAINT pk_personal_rol_cod_rol_in   
         PRIMARY KEY (cod_rol_in),
     )
     GO
