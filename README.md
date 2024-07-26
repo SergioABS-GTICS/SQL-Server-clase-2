@@ -126,6 +126,45 @@ Debido a que la información debe ser única, entonces cada fila de información
     GO
     --SET SHOWPLAN_ALL OFF
     GO
+**Otra forma de crear una tabla con PK**
+
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Rol'
+    )
+    DROP TABLE Personal.rol
+    GO
+    CREATE TABLE Personal.rol
+    (
+        cod_rol_in    INT
+        CONSTRAINT pk_personal_rol_cod_rol_in   
+        PRIMARY KEY NOT NULL,
+        nom_rol_vc VARCHAR(20)
+    )
+    GO
+    INSERT INTO Personal.rol(cod_rol_in, nom_rol_vc) VALUES (8, 'Ventas');
+    INSERT INTO Personal.rol(cod_rol_in, nom_rol_vc) VALUES (3, 'Almacén');
+    INSERT INTO Personal.rol(cod_rol_in, nom_rol_vc) VALUES (4, 'Facturación');
+    GO
+    SELECT * FROM Personal.rol
+    GO
+
+
 ## IDENTITY (valor_inicial, incremento)
 
-El atributo IDENTITY 
+El atributo IDENTITY sirve para generar valores únicos para una columna de una tabla. Se emplea **COMÚNMENTE** en las columnas PK para que haya autoincremento.
+
+Ejemplo: si se escribe IDENTITY(100,1): Empieza en 100 y el incremento es de 1
+
+Ejemplo 2: si se escribe IDENTITY(200,4): El valor inicial es 200 y el incremento es 4
+
+
