@@ -411,4 +411,61 @@ Son estructuras de datos que mejoran el rendimiento de las consultas, para que e
 
 ![image](https://github.com/user-attachments/assets/c99e6f52-443d-4e0f-9716-dffbfe6be13c)
 
-
+Para extraer datos de otra db y setearlas a otra, simplemente se usa INSERT a la DB que quiero colocarle y un SELECT a la otra DB para extraer data. [Ver sintaxis]
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Empleado'
+    )
+    DROP TABLE Personal.Empleado
+    GO
+    CREATE TABLE Personal.Empleado
+    (
+        cod_emp_in        INT IDENTITY(1, 1) NOT NULL,
+    	cod_emp_ch		  CHAR(4)  NULL,
+        pat_emp_vc        VARCHAR(40) NOT NULL,
+    	mat_emp_vc        VARCHAR(40) NOT NULL,
+    	nom_emp_vc        VARCHAR(35) NOT NULL,
+    	dni_emp_vc        CHAR(8) NOT NULL,
+    	pwd_emp_vb        VARBINARY(128) NULL, --Debe ir encriptado, si no cae AUDITORÍA!!
+    	fec_nac_emp_da	  DATE NOT NULL,
+    	cod_sex_bit		  BIT,
+    	cod_rol_in INT NULL,
+    
+        CONSTRAINT pk_personal_empleado_cod_emp_in
+        PRIMARY KEY(cod_emp_in),
+    )
+    GO
+    INSERT INTO Personal.Empleado(              
+        pat_emp_vc,       
+    	mat_emp_vc,        
+    	nom_emp_vc,        
+    	dni_emp_vc,        
+    	fec_nac_emp_da,	  
+    	cod_sex_bit		  
+    
+    )
+    SELECT [pat_ben_vc]
+          ,[mat_ben_vc]
+          ,[nom_ben_vc]
+          ,[dni_ben_ch]
+          ,[fec_nac_ben_da]
+          ,[cod_sex_bi]
+      FROM [pvl].[dbo].[Beneficiario]
+      WHERE LEN(TRIM(dni_ben_ch)) = 8
+    
+    GO
+    SELECT * FROM  [Empresa].[Personal].Empleado
+    
+    UPDATE Personal.Empleado
+    SET cod_emp_ch = 'E' +  RIGHT('000' + LTRIM(cod_emp_in),3)
+    
+    SELECT * FROM Personal.Empleado
