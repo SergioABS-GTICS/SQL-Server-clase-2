@@ -246,6 +246,18 @@ ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
 
 ## ALTERNATE KEY (CLAVE ALTERNATIVA)
 
+**CARACTERÍSTICAS**
+
+**UNICIDAD: Valores únicos**
+
+**INDEXACIÓN: Cuando se crean las claves alternas, el motor de SQL crea un índice no-clúster en esas columnas. Esto optimiza las operaciones de búsqueda**
+
+**INTEGRIDAD REFERENCIAL: Las claves alternas pueden ser usadas como Foreign Keys (FK) en otras tablas.**
+
+**MÚLTIPLES CLAVES ALTERNAS: Pueden haber muchas claves alternas en una tabla**
+
+**SELECCIÓN DE LA CLAVE ALTERNA: Se debe seleccionar considerando que sea estable a largo plazo, mínima cantidad de columnas y única (mismas restricciones de la PK)**
+
     USE Empresa
     GO
     IF EXISTS
@@ -279,3 +291,52 @@ ALTER sirve para modificar TABLAS, BASE DE DATOS Y SCHEMAS
     GO
     SELECT * FROM Personal.rol
     GO
+
+**UPDATE con función LTRIM y RIGHT**
+
+LTRIM: elimina los espacios en blanco de la izquierda en una cadena de caracteres.
+
+RIGHT: Comienza desde el caracter pegado a la derecha y cuenta la cantidad de caracteres que se solicita. Ejemplo: Right("Sergio",5) = "ergio"
+
+    USE Empresa
+    GO
+    IF EXISTS
+    (
+        SELECT *
+        FROM sys.schemas s
+        INNER JOIN sys.tables t
+        ON s.schema_id = t.schema_id
+        WHERE
+                s.name = 'Personal'
+            AND
+                t.name = 'Rol'
+    )
+    DROP TABLE Personal.rol
+    GO
+    CREATE TABLE Personal.rol
+    (
+        cod_rol_in        INT IDENTITY(1, 1) NOT NULL,
+        cod_rol_ch        CHAR(4) NULL,
+        nom_rol_vc        VARCHAR(20) NOT NULL,
+    
+        CONSTRAINT pk_personal_rol_cod_rol_in
+        PRIMARY KEY(cod_rol_in),
+    )
+    GO
+    INSERT INTO Personal.rol(nom_rol_vc)
+    SELECT name
+    FROM sys.schemas
+    WHERE principal_id != schema_id
+    ORDER BY name
+    GO
+    SELECT * FROM Personal.rol
+    GO
+    UPDATE Personal.rol
+    SET cod_rol_ch = 'R'+RIGHT('000'+LTRIM(cod_rol_in),3) FROM Personal.rol
+    GO
+    
+    ALTER TABLE Personal.rol
+    ADD CONSTRAINT ak_personal_cod_rol_ch
+    UNIQUE (cod_rol_ch)
+    
+    SELECT * FROM Personal.rol
