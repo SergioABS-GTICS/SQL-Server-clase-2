@@ -483,3 +483,13 @@ Las FK son las columnas que hacen referencia a las PK de otras tablas, es decir 
 **Relación entre tablas: Establecen relaciones entre tablas**
 
 **Restricciones de referencia: Imponen restricciones de referencia, no se pueden insertar ni actualizar así porque sí**
+
+## Asignar permiso para modificar las tablas en entorno gráfico
+
+![image](https://github.com/user-attachments/assets/8c7d1a98-6399-4ba4-a740-36f10216c2a4)
+
+![image](https://github.com/user-attachments/assets/a1eefb3b-3f03-45d0-9edd-491a81992f3c)
+
+**Ahora sí podemos verlo en entorno gráfico**
+
+![image](https://github.com/user-attachments/assets/fe63c352-a00b-4811-b184-ed475a60a231)
